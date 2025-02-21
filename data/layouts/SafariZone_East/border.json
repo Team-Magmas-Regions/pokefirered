@@ -1,0 +1,40 @@
+{
+  "mapgridSizeInBits": 16,
+  "mapgridMasks": {
+    "collision": "0x0c00",
+    "elevation": "0xf000",
+    "metatileId": "0x03ff"
+  },
+  "mapgrid": [
+    {
+      "collision": 0,
+      "elevation": 0,
+      "metatileId": 757
+    },
+    {
+      "collision": 0,
+      "elevation": 0,
+      "metatileId": 758
+    },
+    {
+      "collision": 0,
+      "elevation": 0,
+      "metatileId": 759
+    },
+    {
+      "collision": 0,
+      "elevation": 0,
+      "metatileId": 765
+    },
+    {
+      "collision": 0,
+      "elevation": 0,
+      "metatileId": 766
+    },
+    {
+      "collision": 0,
+      "elevation": 0,
+      "metatileId": 767
+    }
+  ]
+}

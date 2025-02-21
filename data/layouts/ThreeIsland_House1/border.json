@@ -1,0 +1,30 @@
+{
+  "mapgridSizeInBits": 16,
+  "mapgridMasks": {
+    "collision": "0x0c00",
+    "elevation": "0xf000",
+    "metatileId": "0x03ff"
+  },
+  "mapgrid": [
+    {
+      "collision": 0,
+      "elevation": 0,
+      "metatileId": 8
+    },
+    {
+      "collision": 0,
+      "elevation": 0,
+      "metatileId": 8
+    },
+    {
+      "collision": 0,
+      "elevation": 0,
+      "metatileId": 8
+    },
+    {
+      "collision": 0,
+      "elevation": 0,
+      "metatileId": 8
+    }
+  ]
+}

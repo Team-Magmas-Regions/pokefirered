@@ -1,0 +1,1187 @@
+{
+  "numMetatiles": 512,
+  "attributeSizeInBits": 16,
+  "attributeMasks": {
+    "behavior": "0x00ff",
+    "layer": "0xf000",
+    "unused": "0x0f00"
+  },
+  "metatiles": [
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 0,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 0,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 0,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 0,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 0,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 0,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 0,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 0,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 0,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 0,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 0,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 2,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 0,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 2,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 0,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 2,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 21,
+        "layer": 0,
+        "unused": 4
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 2,
+        "unused": 2
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 21,
+        "layer": 0,
+        "unused": 4
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 2,
+        "unused": 2
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 21,
+        "layer": 0,
+        "unused": 4
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 2,
+        "unused": 2
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 0,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 2,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 0,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 2,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 0,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 2,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 0,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 2,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 0,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 2,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 21,
+        "layer": 0,
+        "unused": 4
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 2,
+        "unused": 2
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 21,
+        "layer": 0,
+        "unused": 4
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 2,
+        "unused": 2
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 21,
+        "layer": 0,
+        "unused": 4
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 2,
+        "unused": 2
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 21,
+        "layer": 0,
+        "unused": 4
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 2,
+        "unused": 2
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 0,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 2,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 0,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 2,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 0,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 2,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 0,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 2,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 21,
+        "layer": 0,
+        "unused": 4
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 2,
+        "unused": 2
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 21,
+        "layer": 0,
+        "unused": 4
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 2,
+        "unused": 2
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 21,
+        "layer": 0,
+        "unused": 4
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 2,
+        "unused": 2
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 21,
+        "layer": 0,
+        "unused": 4
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 2,
+        "unused": 2
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 0,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 2,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 0,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 2,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 0,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 2,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 0,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 2,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 0,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 0,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 0,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 2,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 0,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 2,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 0,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 2,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 0,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 2,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 0,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 2,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 0,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 0,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 0,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 0,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 21,
+        "layer": 0,
+        "unused": 4
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 0,
+        "unused": 2
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 0,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 2,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 0,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 2,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 0,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 2,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 0,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 2,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 0,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 2,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 0,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 0,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 0,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 0,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 21,
+        "layer": 0,
+        "unused": 4
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 2,
+        "unused": 2
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 0,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 2,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 0,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 2,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 0,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 2,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 0,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 2,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 0,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 2,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 21,
+        "layer": 0,
+        "unused": 4
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 2,
+        "unused": 2
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 21,
+        "layer": 0,
+        "unused": 4
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 0,
+        "unused": 2
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 0,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 2,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 0,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 2,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 0,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 2,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 21,
+        "layer": 0,
+        "unused": 4
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 2,
+        "unused": 2
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 21,
+        "layer": 0,
+        "unused": 4
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 2,
+        "unused": 2
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 21,
+        "layer": 0,
+        "unused": 4
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 2,
+        "unused": 2
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 21,
+        "layer": 0,
+        "unused": 4
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 2,
+        "unused": 2
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 21,
+        "layer": 0,
+        "unused": 4
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 0,
+        "unused": 2
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 0,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 2,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 0,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 2,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 0,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 2,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 21,
+        "layer": 0,
+        "unused": 4
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 2,
+        "unused": 2
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 0,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 2,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 0,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 2,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 21,
+        "layer": 0,
+        "unused": 4
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 0,
+        "unused": 2
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 21,
+        "layer": 0,
+        "unused": 4
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 2,
+        "unused": 2
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 0,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 2,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 101,
+        "layer": 0,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 2,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 0,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 2,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 21,
+        "layer": 0,
+        "unused": 4
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 2,
+        "unused": 2
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 0,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 2,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 0,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 2,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 0,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 0,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 21,
+        "layer": 0,
+        "unused": 4
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 2,
+        "unused": 2
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 0,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 0,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 0,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 0,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 132,
+        "layer": 0,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 2,
+        "unused": 0
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 21,
+        "layer": 0,
+        "unused": 4
+      }
+    },
+    {
+      "attributes": {
+        "behavior": 0,
+        "layer": 2,
+        "unused": 2
+      }
+    }
+  ]
+}
