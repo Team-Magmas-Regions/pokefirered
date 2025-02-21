@@ -116,6 +116,8 @@ RAMSCRGEN := $(TOOLS_DIR)/ramscrgen/ramscrgen$(EXE)
 FIX       := $(TOOLS_DIR)/gbafix/gbafix$(EXE)
 MAPJSON   := $(TOOLS_DIR)/mapjson/mapjson$(EXE)
 JSONPROC  := $(TOOLS_DIR)/jsonproc/jsonproc$(EXE)
+BIN2JSON :=  $(TOOLS_DIR)/json-bin-converter/bin2json$(EXE)
+JSON2BIN :=  $(TOOLS_DIR)/json-bin-converter/json2bin$(EXE)
 
 PERL := perl
 SHA1 := $(shell { command -v sha1sum || command -v shasum; } 2>/dev/null) -c
@@ -216,6 +218,10 @@ clean-assets:
 	find sound -iname '*.bin' -exec rm {} +
 	find . \( -iname '*.1bpp' -o -iname '*.4bpp' -o -iname '*.8bpp' -o -iname '*.gbapal' -o -iname '*.lz' -o -iname '*.rl' -o -iname '*.latfont' -o -iname '*.hwjpnfont' -o -iname '*.fwjpnfont' \) -exec rm {} +
 	find $(DATA_ASM_SUBDIR)/maps \( -iname 'connections.inc' -o -iname 'events.inc' -o -iname 'header.inc' \) -exec rm {} +
+# Clear the layouts/map.bin and layouts/border.bin files to be recompiled with json
+	find $(DATA_ASM_SUBDIR)/layouts \( -iname 'map.bin' -o -iname 'border.bin' \) -exec rm {} +
+# Clear the metatiles.bin and metatile_attributes.bin files to be recompiled with json
+	find $(DATA_ASM_SUBDIR)/tilesets \( -iname 'metatiles.bin' -o -iname 'metatile_attributes.bin' \) -exec rm {} +
 
 tidy:
 	$(RM) $(ALL_BUILDS:%=poke%{.gba,.elf,.map})
