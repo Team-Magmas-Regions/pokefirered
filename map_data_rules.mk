@@ -79,10 +79,10 @@ $(DATA_SRC_SUBDIR)/heal_locations.h: $(MAP_JSONS)
 # This is a migration script you can run to convert data/layouts/*/border.bin and data/layouts/*/map.bin bin files to json
 .PHONY: run-layout-mapgrids-bin-to-json
 run-layout-mapgrids-bin-to-json:
-	$(BIN2JSON) rse mapgrid $(LAYOUTS_BORDER_BINS) $(LAYOUTS_MAP_BINS)
+	$(BIN2JSON) frlg mapgrid $(LAYOUTS_BORDER_BINS) $(LAYOUTS_MAP_BINS)
 
 # This is a migration script you can run to convert data/tilesets/*/*/metatiles.bin and data/tilesets/*/*/metatile_attributes.bin bin files to json
 .PHONY: run-tileset-metatiles-bin-to-json
 run-tileset-metatiles-bin-to-json:
-		$(BIN2JSON) rse metatiles $(TILESETS_METATILES_BINS)
-		$(BIN2JSON) rse metatile_attributes $(TILESETS_METATILE_ATTRIBUTES_BINS)
+		$(BIN2JSON) frlg metatiles $(TILESETS_METATILES_BINS)
+		$(BIN2JSON) frlg metatile_attributes $(TILESETS_METATILE_ATTRIBUTES_BINS)
