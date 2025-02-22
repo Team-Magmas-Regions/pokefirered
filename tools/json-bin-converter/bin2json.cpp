@@ -238,7 +238,7 @@ int main(int argc, char *argv[])
                 if (version == Version::RubySapphireEmerald) {
                     json = convertMetatileAttributesBinToJson(MetatileAttributesInfoRSE, is_secondary, buffer);
                 } else if (version == Version::FireRedLeafGreen) {
-                    json = convertMetatileAttributesBinToJson<>(MetatileAttributesInfoFRLG, is_secondary, buffer);
+                    json = convertMetatileAttributesBinToJson(MetatileAttributesInfoFRLG, is_secondary, buffer);
                 } else if (version == Version::Custom) {
                     json = convertMetatileAttributesBinToJson(CustomMetatileAttributesInfo, is_secondary, buffer);
                 } else {

@@ -60,7 +60,7 @@ const MetatilesInfo MetatilesInfoRSE{
 };
 const MetatilesInfo MetatilesInfoFRLG{
    .num_metatiles_in_primary = 640,
-   .num_metatiles_in_secondary = 512,
+   .num_metatiles_in_secondary = 384,
    .num_tiles_in_primary = 640,
    .num_tiles_in_secondary = 384,
    .num_pals_in_primary = 7,
@@ -84,8 +84,8 @@ const MetatileAttributesInfo<uint16_t> MetatileAttributesInfoRSE{
    }
 };
 const MetatileAttributesInfo<uint32_t> MetatileAttributesInfoFRLG{
-   .num_metatiles_in_primary = 512,
-   .num_metatiles_in_secondary = 512,
+   .num_metatiles_in_primary = 640,
+   .num_metatiles_in_secondary = 384,
    .attribute_masks = {
       {"behavior",  0x000001FF},
       {"terrain",   0x00003E00},
