@@ -5,6 +5,25 @@
 
 #include <string>
 #include <map>
+#include <cstring>
+
+enum class Version : unsigned {
+   RubySapphireEmerald,
+   FireRedLeafGreen,
+   Custom,
+
+   Error
+};
+constexpr auto NumVersions = static_cast<unsigned>(Version::Error);
+constexpr char* VersionStr[NumVersions] = {(char*)"rse", (char*)"frlg", (char*)"custom"};
+inline Version StrToVersion(const char* str) {
+   for(unsigned i = 0; i < NumVersions; i++) {
+       if (strcmp(str, VersionStr[i]) == 0) {
+           return static_cast<Version>(i);
+       }
+   }
+   return Version::Error;
+}
 
 struct MapGridInfo {
    std::map<std::string, uint16_t> mapgrid_masks{};

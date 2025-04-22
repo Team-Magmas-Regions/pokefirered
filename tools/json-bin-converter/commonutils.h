@@ -79,4 +79,22 @@ inline bool filepathContainsSecondary(const std::filesystem::path& file_path) {
     return false;
 }
 
+/// Warn the user if we're expecting a bin file extension, but a different extension is provided
+inline bool verifyBinFileExtension(std::filesystem::path file_path) {
+   if (file_path.extension() != ".bin") {
+      fprintf(stderr, "Warning: '.bin' file extension missing for file %s. If this is intentional you can ignore this message.\n", file_path.c_str());
+      return false;
+   }
+   return true;
+}
+
+/// Warn the user if we're expecting a json file extension, but a different extension is provided
+inline bool verifyJsonFileExtension(std::filesystem::path file_path) {
+   if (file_path.extension() != ".json") {
+      fprintf(stderr, "Warning: '.json' file extension missing for file %s. If this is intentional you can ignore this message.\n", file_path.c_str());
+      return false;
+   }
+   return true;
+}
+
 #endif // COMMONUTILS_H
