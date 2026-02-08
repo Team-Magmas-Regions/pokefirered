@@ -65,3 +65,7 @@ prefabs.json
 data/layouts/**/*.bin
 data/tilesets/primary/**/*.bin
 data/tilesets/secondary/**/*.bin
+build-cmake-*/
+.cache/
+CMakeLists.txt
+compile_commands.json
