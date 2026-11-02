@@ -12,6 +12,28 @@
 #include <filesystem>
 #include <nlohmann/json.hpp>
 
+
+void bin2json::convertMapgridBinToJson(const std::string &file_name, Version version) {
+    // Deserialize bin
+    std::filesystem::path file_path = file_name;
+    verifyBinFileExtension(file_path);
+
+    std::vector<std::byte> buffer = readBinFileIntoBuffer(file_path);
+    if (buffer.empty()) {
+        fprintf(stderr, "Warning - Issue reading file: %s\n", file_name.c_str());
+        return;
+    }
+
+    // Process
+    const MapGridInfo& info = version == Version::Custom ? CustomMapGridInfo : MapGridInfoAll;
+    nlohmann::ordered_json json = bin2json::parseMapgridBytes(info, buffer);
+
+    // Serialize as json
+    file_path.replace_extension("json");
+    std::ofstream output_json_file(file_path);
+    output_json_file << json.dump(2);    
+}
+
 nlohmann::ordered_json bin2json::parseMapgridBytes(const MapGridInfo& info, const std::vector<std::byte>& buffer) {
     nlohmann::ordered_json json;
 
@@ -31,14 +53,7 @@ nlohmann::ordered_json bin2json::parseMapgridBytes(const MapGridInfo& info, cons
         bytes_loaded++;
 
         if (bytes_loaded == bytes_needed) {
-            nlohmann::ordered_json mapgrid = nlohmann::ordered_json::object();
-            for (auto mask: info.mapgrid_masks) {
-                // Mask the full variable to isolate the var we want, then bit shift the mask until we hit the
-                //  start of our mask
-                uint16_t val = (temp_var & mask.second) >> firstBitOffset(mask.second);
-                mapgrid[mask.first] = val;
-            }
-            json["mapgrid"].push_back(mapgrid);
+            json["mapgrid"].push_back(deserializeSingleMapgridTile(info.mapgrid_masks, temp_var));
 
             // Reset
             bytes_loaded = 0;
@@ -49,7 +64,18 @@ nlohmann::ordered_json bin2json::parseMapgridBytes(const MapGridInfo& info, cons
     return json;
 }
 
-void bin2json::convertMapgridBinToJson(const std::string &file_name, Version version) {
+nlohmann::ordered_json bin2json::deserializeSingleMapgridTile(const std::map<std::string, uint16_t>& mask, uint16_t value){
+    nlohmann::ordered_json mapgrid = nlohmann::ordered_json::object();
+    for (auto mask: mask) {
+        // Mask the full variable to isolate the var we want, then bit shift the mask until we hit the
+        //  start of our mask
+        uint16_t val = (value & mask.second) >> firstBitOffset(mask.second);
+        mapgrid[mask.first] = val;
+    }
+    return mapgrid;
+}
+
+void bin2json::convertMetatilesBinToJson(const std::string &file_name, Version version) {
     // Deserialize bin
     std::filesystem::path file_path = file_name;
     verifyBinFileExtension(file_path);
@@ -61,8 +87,11 @@ void bin2json::convertMapgridBinToJson(const std::string &file_name, Version ver
     }
 
     // Process
-    const MapGridInfo& info = version == Version::Custom ? CustomMapGridInfo : MapGridInfoAll;
-    nlohmann::ordered_json json = bin2json::parseMapgridBytes(info, buffer);
+    const MetatilesInfo& info = version == Version::Custom ? CustomMetatilesInfo :
+                                version == Version::FireRedLeafGreen ? MetatilesInfoFRLG :
+                                                           MetatilesInfoRSE;
+    bool is_secondary = filepathContainsSecondary(file_path);
+    nlohmann::ordered_json json = bin2json::parseMetatilesBytes(info, is_secondary, buffer);
 
     // Serialize as json
     file_path.replace_extension("json");
@@ -94,6 +123,8 @@ nlohmann::ordered_json bin2json::parseMetatilesBytes(const MetatilesInfo& info, 
         temp_var = temp_var >> 8 | static_cast<uint16_t>(byte) << 8;
         bytes_loaded++;
 
+        // TODO(@traeighsea): update this to take a vector of bytes up to the size of the bytes needed.
+        //      Then create a function to take in a vector of bytes for serialization
         if (bytes_loaded == bytes_needed) {
             nlohmann::ordered_json tile = nlohmann::ordered_json::object();
             for (auto mask: info.tiles_masks) {
@@ -119,7 +150,7 @@ nlohmann::ordered_json bin2json::parseMetatilesBytes(const MetatilesInfo& info, 
     return json;
 }
 
-void bin2json::convertMetatilesBinToJson(const std::string &file_name, Version version) {
+void bin2json::convertMetatileAttributesBinToJson(const std::string &file_name, Version version) {
     // Deserialize bin
     std::filesystem::path file_path = file_name;
     verifyBinFileExtension(file_path);
@@ -131,11 +162,18 @@ void bin2json::convertMetatilesBinToJson(const std::string &file_name, Version v
     }
 
     // Process
-    const MetatilesInfo& info = version == Version::Custom ? CustomMetatilesInfo :
-                                version == Version::FireRedLeafGreen ? MetatilesInfoFRLG :
-                                                           MetatilesInfoRSE;
     bool is_secondary = filepathContainsSecondary(file_path);
-    nlohmann::ordered_json json = bin2json::parseMetatilesBytes(info, is_secondary, buffer);
+    nlohmann::ordered_json json;
+    if (version == Version::RubySapphireEmerald) {
+        json = bin2json::parseMetatileAttributesBytes(MetatileAttributesInfoRSE, is_secondary, buffer);
+    } else if (version == Version::FireRedLeafGreen) {
+        json = bin2json::parseMetatileAttributesBytes(MetatileAttributesInfoFRLG, is_secondary, buffer);
+    } else if (version == Version::Custom) {
+        json = bin2json::parseMetatileAttributesBytes(CustomMetatileAttributesInfo, is_secondary, buffer);
+    } else {
+        fprintf(stderr, "Warning - Unknown version for metatile attributes: %s\n", file_name.c_str());
+        return;
+    }
 
     // Serialize as json
     file_path.replace_extension("json");
@@ -182,35 +220,4 @@ nlohmann::ordered_json bin2json::parseMetatileAttributesBytes(const MetatileAttr
     }
 
     return json;
-}
-
-void bin2json::convertMetatileAttributesBinToJson(const std::string &file_name, Version version) {
-    // Deserialize bin
-    std::filesystem::path file_path = file_name;
-    verifyBinFileExtension(file_path);
-
-    std::vector<std::byte> buffer = readBinFileIntoBuffer(file_path);
-    if (buffer.empty()) {
-        fprintf(stderr, "Warning - Issue reading file: %s\n", file_name.c_str());
-        return;
-    }
-
-    // Process
-    bool is_secondary = filepathContainsSecondary(file_path);
-    nlohmann::ordered_json json;
-    if (version == Version::RubySapphireEmerald) {
-        json = bin2json::parseMetatileAttributesBytes(MetatileAttributesInfoRSE, is_secondary, buffer);
-    } else if (version == Version::FireRedLeafGreen) {
-        json = bin2json::parseMetatileAttributesBytes(MetatileAttributesInfoFRLG, is_secondary, buffer);
-    } else if (version == Version::Custom) {
-        json = bin2json::parseMetatileAttributesBytes(CustomMetatileAttributesInfo, is_secondary, buffer);
-    } else {
-        fprintf(stderr, "Warning - Unknown version for metatile attributes: %s\n", file_name.c_str());
-        return;
-    }
-
-    // Serialize as json
-    file_path.replace_extension("json");
-    std::ofstream output_json_file(file_path);
-    output_json_file << json.dump(2);    
 }

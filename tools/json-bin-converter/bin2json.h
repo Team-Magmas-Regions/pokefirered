@@ -11,6 +11,8 @@
 #include "custominfos.h"
 
 #include <vector>
+#include <map>
+#include <string>
 #include <nlohmann/json.hpp>
 
 
@@ -19,15 +21,21 @@ namespace bin2json {
 /// Given a file name and version, loads file a binary file, and attempts to output a json file
 ///   as a sibling to the original bin file. Will throw a warning if the file extension is not
 ///   bin, but will proceed as usual
+/// Touches the filesystem
 void convertMapgridBinToJson(const std::string &file_name, Version version);
 
 /// Takes in a collection of bytes that is assumed to follow the mapgrid format as
 ///   detailed in the MapGridInfo struct, which can then be serialized to json
 nlohmann::ordered_json parseMapgridBytes(const MapGridInfo& info, const std::vector<std::byte>& buffer);
 
+/// Deserializes a single value from a collection of masks
+nlohmann::ordered_json deserializeSingleMapgridTile(const std::map<std::string, uint16_t>& mask, uint16_t value);
+
+
 /// Given a file name and version, loads file a binary file, and attempts to output a json file
 ///   as a sibling to the original bin file. Will throw a warning if the file extension is not
 ///   bin, but will proceed as usual
+/// Touches the filesystem
 void convertMetatilesBinToJson(const std::string &file_name, Version version);
 
 /// Takes in a collection of bytes that is assumed to follow the metatiles format as
@@ -37,6 +45,7 @@ nlohmann::ordered_json parseMetatilesBytes(const MetatilesInfo& info, bool is_se
 /// Given a file name and version, loads file a binary file, and attempts to output a json file
 ///   as a sibling to the original bin file. Will throw a warning if the file extension is not
 ///   bin, but will proceed as usual
+/// Touches the filesystem
 void convertMetatileAttributesBinToJson(const std::string &file_name, Version version);
 
 /// Takes in a collection of bytes that is assumed to follow the metatile attributes format
