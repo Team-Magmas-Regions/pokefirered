@@ -1,12 +1,14 @@
 CXX ?= g++
 
-CXXFLAGS := -Wall -std=c++17 -O2
+CXXFLAGS := -Wall -std=c++17 -g
 
 INCLUDES := -I../libs
 
 BIN2JSON_SRCS := bin2json.cpp bin2json_main.cpp
 
 JSON2BIN_SRCS := json2bin.cpp json2bin_main.cpp
+
+TEST_JSON_BIN_CONVERTER_SRCS := bin2json.cpp json2bin.cpp jsonbinconverter_testsuite.cpp
 
 COMMON_HEADERS := jsonbinconverter.h commonutils.h ../libs/nlohmann/json.hpp
 
@@ -31,6 +33,10 @@ bin2json$(EXE): $(BIN2JSON_SRCS) $(COMMON_HEADERS) $(BIN2JSON_HEADERS)
 json2bin$(EXE): $(JSON2BIN_SRCS) $(COMMON_HEADERS) $(JSON2BIN_HEADERS)
 	$(CXX) $(CXXFLAGS) $(INCLUDES) $(JSON2BIN_SRCS) -o $@ $(LDFLAGS)
 
+test-json-bin-converter$(EXE): $(TEST_JSON_BIN_CONVERTER_SRCS) $(COMMON_HEADERS) $(BIN2JSON_HEADERS) $(JSON2BIN_HEADERS)
+	$(CXX) $(CXXFLAGS) $(INCLUDES) $(TEST_JSON_BIN_CONVERTER_SRCS) -o $@ $(LDFLAGS)
+
 clean:
-	$(RM) bin2json bin2json.exe
-	$(RM) json2bin json2bin.exe
+	$(RM) bin2json bin2json$(EXE)
+	$(RM) json2bin json2bin$(EXE)
+	$(RM) test-json-bin-converter test-json-bin-converter$(EXE)
