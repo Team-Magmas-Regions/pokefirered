@@ -46,14 +46,18 @@ std::vector<uint16_t> json2bin::parseMapgridJson (const nlohmann::ordered_json& 
     //  gets bit shifted to the start of the mask, and then finally masked to make sure we don't overflow
     //  into another masked section
     for (auto tile_data: mapgrid) {
-        uint16_t temp_tile{0};
-        for (const auto& [key, value]: masks) {
-            temp_tile |= static_cast<uint16_t>(tile_data[key].template get<uint16_t>() << firstBitOffset(value) & value);
-        }
-        mapgrid_tiles.push_back(temp_tile);
+        mapgrid_tiles.push_back(deserializeSingleMapgridTile(masks, tile_data));
     }
 
     return mapgrid_tiles;
+}
+
+uint16_t json2bin::deserializeSingleMapgridTile(const std::map<std::string, uint16_t>& masks, const nlohmann::ordered_json& tile_data) {
+    uint16_t temp_tile{0};
+    for (const auto& [key, value]: masks) {
+        temp_tile |= static_cast<uint16_t>(tile_data[key].template get<uint16_t>() << firstBitOffset(value) & value);
+    }
+    return temp_tile;
 }
 
 void json2bin::convertMetatilesJsonToBin(const std::string& file_name) {
@@ -102,16 +106,39 @@ std::vector<uint16_t> json2bin::parseMetatilesJson(nlohmann::ordered_json metati
         if (metatile["tiles"].size() != metatiles_json["numTilesInMetatile"]) {
             fprintf(stderr, "Warning: Num tiles in metatile array differ to numTilesInMetatile for file %s.\n", path ? path->c_str() : "");
         }
-        for (auto tile_data: metatile["tiles"]) {
-            uint16_t temp_tile{0};
-            for (const auto& [key, value]: masks) {
-                temp_tile |= static_cast<uint16_t>(tile_data[key].template get<uint16_t>() << firstBitOffset(value) & value);
-            }
-            tiles.push_back(temp_tile);
+
+        std::vector<uint16_t> metatile_tiles = deserializeSingleMetatile(masks, metatile);
+        for(auto metatile_tile : metatile_tiles) {
+            tiles.push_back(metatile_tile);
         }
     }
 
     return tiles;
+}
+
+std::vector<uint16_t> json2bin::deserializeSingleMetatile(std::map<std::string, uint16_t> masks, const nlohmann::ordered_json& metatile) {
+    std::vector<uint16_t> tiles;
+
+    for (auto tile_data: metatile["tiles"]) {
+        uint16_t temp_tile{0};
+        for (const auto& [key, value]: masks) {
+            temp_tile |= static_cast<uint16_t>(tile_data[key].template get<uint16_t>() << firstBitOffset(value) & value);
+        }
+        tiles.push_back(temp_tile);
+    }
+    return tiles;
+}
+
+template <typename T>
+void writeMetatileAttrFileWrapper(const nlohmann::ordered_json& metatile_attribute_json, const std::filesystem::path& pathToWrite) {
+    std::ofstream bin_file{pathToWrite, std::ios::binary | std::ios::out};
+
+    std::vector<T> metatile_attributes_data = json2bin::parseMetatileAttributesJson<T>(metatile_attribute_json, pathToWrite);
+
+    // Serialize our bin file
+    for (const T& metatile_attr: metatile_attributes_data) {
+        bin_file.write(reinterpret_cast<const char *>(&metatile_attr), sizeof(metatile_attr));
+    }
 }
 
 void json2bin::convertMetatileAttributesJsonToBin(const std::string& file_name) {
@@ -124,46 +151,25 @@ void json2bin::convertMetatileAttributesJsonToBin(const std::string& file_name) 
 
     // Setup file to write to
     path.replace_extension("bin");
-    std::ofstream bin_file{path, std::ios::binary | std::ios::out};
 
     // Since the size can vary, we template this function to handle various attribute sizes
     unsigned attribute_size_in_bits = {0};
     attribute_size_in_bits = metatile_attribute_json["attributeSizeInBits"].template get<unsigned>();
     if (attribute_size_in_bits == 8) {
-        std::vector<uint8_t> metatile_attributes_data = json2bin::parseMetatileAttributesJson<uint8_t>(metatile_attribute_json, path);
-
-        // Serialize our bin file
-        for (const uint8_t& metatile_attr: metatile_attributes_data) {
-            bin_file.write(reinterpret_cast<const char *>(&metatile_attr), sizeof(metatile_attr));
-        }
+        writeMetatileAttrFileWrapper<uint8_t>(metatile_attribute_json, path);
     } else if (attribute_size_in_bits == 16) {
-        std::vector<uint16_t> metatile_attributes_data = json2bin::parseMetatileAttributesJson<uint16_t>(metatile_attribute_json, path);
-
-        // Serialize our bin file
-        for (const uint16_t& metatile_attr: metatile_attributes_data) {
-            bin_file.write(reinterpret_cast<const char *>(&metatile_attr), sizeof(metatile_attr));
-        }
+        writeMetatileAttrFileWrapper<uint16_t>(metatile_attribute_json, path);
     } else if (attribute_size_in_bits == 32) {
-        std::vector<uint32_t> metatile_attributes_data = json2bin::parseMetatileAttributesJson<uint32_t>(metatile_attribute_json, path);
-
-        // Serialize our bin file
-        for (const uint32_t& metatile_attr: metatile_attributes_data) {
-            bin_file.write(reinterpret_cast<const char *>(&metatile_attr), sizeof(metatile_attr));
-        }
+        writeMetatileAttrFileWrapper<uint32_t>(metatile_attribute_json, path);
     }  else if (attribute_size_in_bits == 64) { // If someone actually uses this you're insane lol
-        std::vector<uint64_t> metatile_attributes_data = json2bin::parseMetatileAttributesJson<uint64_t>(metatile_attribute_json, path);
-
-        // Serialize our bin file
-        for (const uint64_t& metatile_attr: metatile_attributes_data) {
-            bin_file.write(reinterpret_cast<const char *>(&metatile_attr), sizeof(metatile_attr));
-        }
+        writeMetatileAttrFileWrapper<uint64_t>(metatile_attribute_json, path);
     } else {
         fprintf(stderr, "Warning: attributeSizeInBits either missing or not fixed width 8, 16, 32, 64\n");
     }
 }
 
 template <typename T>
-std::vector<T> json2bin::parseMetatileAttributesJson(nlohmann::ordered_json& metatile_attribute_json, std::optional<std::filesystem::path> path) {
+std::vector<T> json2bin::parseMetatileAttributesJson(const nlohmann::ordered_json& metatile_attribute_json, std::optional<std::filesystem::path> path) {
     if (metatile_attribute_json["metatiles"].size() > metatile_attribute_json["numMetatiles"]) {
         fprintf(stderr, "Warning: More metatiles than in numMetatiles in file %s.\n", path ? path->c_str() : "");
     }
@@ -181,12 +187,17 @@ std::vector<T> json2bin::parseMetatileAttributesJson(nlohmann::ordered_json& met
     //  gets bit shifted to the start of the mask, and then finally masked to make sure we don't overflow
     //  into another masked section
     for (auto metatile: metatile_attribute_json["metatiles"]) {
-        T temp_metatile_attributes{0};
-        for (const auto& [key, value]: masks) {
-            temp_metatile_attributes |= static_cast<T>(metatile["attributes"][key].template get<T>() << firstBitOffset(value) & value);
-        }
-        metatile_attributes_data.push_back(temp_metatile_attributes);
+        metatile_attributes_data.push_back(deserializeSingleMetatileAttribute(masks, metatile));
     }
 
     return metatile_attributes_data;
+}
+
+template <typename T>
+T json2bin::deserializeSingleMetatileAttribute(std::map<std::string, T> masks, const nlohmann::ordered_json& metatile) {
+    T metatile_attributes{0};
+    for (const auto& [key, value]: masks) {
+        metatile_attributes |= static_cast<T>(metatile["attributes"][key].template get<T>() << firstBitOffset(value) & value);
+    }
+    return metatile_attributes;
 }
