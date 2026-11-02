@@ -186,7 +186,7 @@ nlohmann::ordered_json bin2json::parseMetatileAttributesBytes(const MetatileAttr
     nlohmann::ordered_json json;
 
     json["numMetatiles"] = is_secondary ? info.num_metatiles_in_secondary : info.num_metatiles_in_primary;
-    json["attributeSizeInBits"] = sizeInBits(info.attribute_masks);
+    json["attributeSizeInBits"] = sizeInBits(T{});
 
     json["attributeMasks"] = nlohmann::ordered_json::object();
     for (auto masks: info.attribute_masks) {
