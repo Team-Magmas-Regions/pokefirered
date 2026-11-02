@@ -35,7 +35,7 @@ T hexToInt(std::string str)
 template <typename T>
 constexpr unsigned sizeInBits(T var) noexcept
 {
-    return sizeof(typeid(T));
+    return sizeof(T)*8;
 }
 
 /// Keep bitshifting to the right until we get to the first set bit
