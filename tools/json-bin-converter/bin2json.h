@@ -42,6 +42,12 @@ void convertMetatilesBinToJson(const std::string &file_name, Version version);
 ///   detailed in the MetatilesInfo struct, which can then be serialized to json
 nlohmann::ordered_json parseMetatilesBytes(const MetatilesInfo& info, bool is_secondary, const std::vector<std::byte>& buffer);
 
+/// Builds the tiles object array that can be used to wrap individual tiles by calling down to deserializeSingleTile
+nlohmann::ordered_json deserializeSingleMetatile(const MetatilesInfo& info, std::vector<uint16_t> tiles);
+
+/// Uses the metatile info's masks to deserialize the values of the tile into named jsons
+nlohmann::ordered_json deserializeSingleTile(const MetatilesInfo& info, uint16_t tile);
+
 /// Given a file name and version, loads file a binary file, and attempts to output a json file
 ///   as a sibling to the original bin file. Will throw a warning if the file extension is not
 ///   bin, but will proceed as usual
@@ -52,6 +58,10 @@ void convertMetatileAttributesBinToJson(const std::string &file_name, Version ve
 ///   as detailed in the MetatileAttributeInfo struct, which can then be serialized to json
 template<class T>
 nlohmann::ordered_json parseMetatileAttributesBytes(const MetatileAttributesInfo<T>& info, bool is_secondary, const std::vector<std::byte>& buffer);
+
+/// Uses the metatile attr info's masks to deserialize the values of the metatile attribute
+template<class T>
+nlohmann::ordered_json deserializeSingleMetatileAttribute(const MetatileAttributesInfo<T>& info, T attr);
 
 }
 

@@ -117,37 +117,53 @@ nlohmann::ordered_json bin2json::parseMetatilesBytes(const MetatilesInfo& info, 
     uint16_t temp_var{0};
     unsigned bytes_loaded{0};
     const unsigned bytes_needed{sizeInBits(temp_var) / 8};
-    nlohmann::ordered_json tiles = nlohmann::ordered_json::object();
-    tiles["tiles"] = nlohmann::ordered_json::array();
+    std::vector<uint16_t> tiles_array;
     for (auto byte: buffer) {
+        // Pack bytes little-endian
         temp_var = temp_var >> 8 | static_cast<uint16_t>(byte) << 8;
         bytes_loaded++;
 
-        // TODO(@traeighsea): update this to take a vector of bytes up to the size of the bytes needed.
-        //      Then create a function to take in a vector of bytes for serialization
+        // Each iteration we load up one byte until we have enough bites for the size of our tile, then we load that one tile into the array
         if (bytes_loaded == bytes_needed) {
-            nlohmann::ordered_json tile = nlohmann::ordered_json::object();
-            for (auto mask: info.tiles_masks) {
-                // Mask the full variable to isolate the var we want, then bit shift the mask until we hit the
-                //  start of our mask
-                uint16_t val = (temp_var & mask.second) >> firstBitOffset(mask.second);
-                tile[mask.first] = val;
-            }
-            tiles["tiles"].push_back(tile);
-
-            // After filling tiles for that metatile, we add it to the list and clear it
-            if (tiles["tiles"].size() == info.num_tiles_in_metatile) {
-                json["metatiles"].push_back(tiles);
-                tiles["tiles"].clear();
-            }
-
+            tiles_array.push_back(temp_var);
+            
             // Reset
             bytes_loaded = 0;
             temp_var = 0;
         }
+        // Once we have the number of tiles per metatile we can jump right into creatting a fully formed metatile and the correct number of tiles
+        if (tiles_array.size() == info.num_tiles_in_metatile) {
+            nlohmann::ordered_json tiles = deserializeSingleMetatile(info, tiles_array);
+            // After filling tiles for that metatile, we add it to the list and clear it
+            json["metatiles"].push_back(tiles);
+            tiles_array.clear();
+        }
+
     }
 
     return json;
+}
+
+nlohmann::ordered_json bin2json::deserializeSingleMetatile(const MetatilesInfo& info, std::vector<uint16_t> tiles_array) {
+    nlohmann::ordered_json tiles_json = nlohmann::ordered_json::object();
+    tiles_json["tiles"] = nlohmann::ordered_json::array();
+
+    for (auto tileInt : tiles_array) {
+        nlohmann::ordered_json tile = deserializeSingleTile(info, tileInt);
+        tiles_json["tiles"].push_back(tile);
+    }
+    return tiles_json;
+}
+
+nlohmann::ordered_json bin2json::deserializeSingleTile(const MetatilesInfo& info, uint16_t tile) {
+    nlohmann::ordered_json tile_json = nlohmann::ordered_json::object();
+    for (auto mask: info.tiles_masks) {
+        // Mask the full variable to isolate the var we want, then bit shift the mask until we hit the
+        //  start of our mask
+        uint16_t val = (tile & mask.second) >> firstBitOffset(mask.second);
+        tile_json[mask.first] = val;
+    }
+    return tile_json;
 }
 
 void bin2json::convertMetatileAttributesBinToJson(const std::string &file_name, Version version) {
@@ -178,7 +194,7 @@ void bin2json::convertMetatileAttributesBinToJson(const std::string &file_name, 
     // Serialize as json
     file_path.replace_extension("json");
     std::ofstream output_json_file(file_path);
-    output_json_file << json.dump(2);    
+    output_json_file << json.dump(2);
 }
 
 template<class T>
@@ -204,13 +220,7 @@ nlohmann::ordered_json bin2json::parseMetatileAttributesBytes(const MetatileAttr
         bytes_loaded++;
 
         if (bytes_loaded == bytes_needed) {
-            nlohmann::ordered_json attributes = nlohmann::ordered_json::object();
-            for (auto mask: info.attribute_masks) {
-                // Mask the full variable to isolate the var we want, then bit shift the mask until we hit the
-                //  start of our mask
-                T val = (temp_var & mask.second) >> firstBitOffset(mask.second);
-                attributes["attributes"][mask.first] = val;
-            }
+            nlohmann::ordered_json attributes = deserializeSingleMetatileAttribute(info, temp_var);
             json["metatiles"].push_back(attributes);
 
             // Reset
@@ -220,4 +230,16 @@ nlohmann::ordered_json bin2json::parseMetatileAttributesBytes(const MetatileAttr
     }
 
     return json;
+}
+
+template<class T>
+nlohmann::ordered_json bin2json::deserializeSingleMetatileAttribute(const MetatileAttributesInfo<T>& info, T attr) {
+    nlohmann::ordered_json attribute_json = nlohmann::ordered_json::object();
+    for (auto mask: info.attribute_masks) {
+        // Mask the full variable to isolate the var we want, then bit shift the mask until we hit the
+        //  start of our mask
+        T val = (attr & mask.second) >> firstBitOffset(mask.second);
+        attribute_json["attributes"][mask.first] = val;
+    }
+   return attribute_json;
 }
