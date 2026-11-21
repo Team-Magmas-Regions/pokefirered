@@ -22,11 +22,11 @@ int main(int argc, char *argv[]) {
         auto testsTotalCount = [&testTotal, &failureCount]() -> std::string {
             return (std::stringstream{} << "[" << testTotal << "/" << testTotal << "]").str();
         };
-        std::cout << "Testing " << testArea;
+        std::cout << "Testing " << testArea << ": " << testsTotalCount();
         if (failureCount == 0) {
-            std::cout << ": " << testsTotalCount() << " Success UwU";
+            std::cout << " Success UwU";
         } else {
-            std::cout << ": " << testsTotalCount() << " - OwO no! " << failureCount << " tests failed ;_;";
+            std::cout << " - OwO no! " << failureCount << " tests failed ;_;";
         }
         std::cout << std::endl;
         failureCount = 0;
