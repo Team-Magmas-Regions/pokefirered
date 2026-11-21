@@ -12,7 +12,7 @@ TEST_JSON_BIN_CONVERTER_SRCS := bin2json.cpp json2bin.cpp jsonbinconverter_tests
 
 COMMON_HEADERS := jsonbinconverter.h commonutils.h ../libs/nlohmann/json.hpp
 
-BIN2JSON_HEADERS := bin2json.h datainfos.h custominfos.h
+BIN2JSON_HEADERS := bin2json.h datainfos.h custominfos.h testdata.h
 
 JSON2BIN_HEADERS := json2bin.h
 
